@@ -5,10 +5,23 @@ import UserOrgForm from "./UserOrgForm";
 import OrganizationForm from "./OrgForm";
 import InviteForm from "./InviteForm";
 import AccepteInviteForm from "./AccepteInvite";
+import { useEffect, useState } from "react";
+import { set } from "zod";
 
 export default function Home() {
+  const [org, setOrg] = useState(null);
   const { data: session, error, isPending } = authClient.useSession();
   const { data: organizations } = authClient.useListOrganizations();
+
+  useEffect(() => {
+    const fetchOrganizations = async () => {
+      const org = await authClient.organization.getFullOrganization()
+      console.log(org)
+    }
+    fetchOrganizations();
+  }
+    , [session]);
+
 
   // Render a loading state while the session is pending.
   if (isPending) {
@@ -53,6 +66,7 @@ export default function Home() {
             {organizations.map((org) => (
               <li key={org.id} className="mb-2">
                 {org.name}
+
               </li>
             ))}
           </ul>
@@ -68,7 +82,7 @@ export default function Home() {
         <h2 className="text-2xl font-semibold mb-4">Invite User</h2>
         <InviteForm />
       </section>
-     
+
     </div>
   );
 }
