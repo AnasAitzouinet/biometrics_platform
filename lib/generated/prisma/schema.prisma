@@ -82,11 +82,16 @@ model Organization {
   @@map("organization")
 }
 
+enum Roles {
+  ADMIN
+  MEMBER
+}
+
 model Member {
   id             String       @id
   organizationId String
   userId         String
-  role           String
+  role           Roles
   createdAt      DateTime
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
