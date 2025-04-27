@@ -11,10 +11,15 @@ import { cn } from "@/lib/utils"
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
+import { EmployeeSignUp } from "@/server/Employee"
+import { EmployeeSignUpSchema } from "@/schema/Employee"
+import { authClient } from "@/lib/auth-client"
 
 export default function RegisterPageComponent() {
   const [showOtpForm, setShowOtpForm] = useState(false)
   const [email, setEmail] = useState("")
+  const [FullName, setFullName] = useState("")
+  const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [isVerifying, setIsVerifying] = useState(false)
   const [otp, setOtp] = useState("")
@@ -23,8 +28,37 @@ export default function RegisterPageComponent() {
     e.preventDefault()
     setIsLoading(true)
 
+    // Validate form inputs
+    const ValidatedInput = EmployeeSignUpSchema.safeParse({
+      fullName: FullName,
+      email,
+      password,
+    })
+    if (!ValidatedInput.success) {
+      setIsLoading(false)
+      console.error("ValidatedInput Error",ValidatedInput.error )
+      return
+    }
+
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const User = await EmployeeSignUp({
+        fullName: ValidatedInput.data.fullName,
+        email: ValidatedInput.data.email,
+        password: ValidatedInput.data.password,
+      })
+      console.log("user", User)
+      if (User.error) {
+        setIsLoading(false)
+        alert(User.message)
+        return
+      }
+
+    } catch (error) {
+      setIsLoading(false)
+      alert("An error occurred while signing up. Please try again.")
+      return
+    }
 
     // Here you would typically call your API to register the user and send OTP
     setIsLoading(false)
@@ -32,15 +66,24 @@ export default function RegisterPageComponent() {
   }
 
   const handleVerifyOtp = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsVerifying(true)
+    e.preventDefault();
+    setIsVerifying(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const { data, error } = await authClient.emailOtp.verifyEmail({ email, otp });
+      
+      if (error) {
+        throw new Error(error.message || "OTP verification failed");
+      }
 
-    // Here you would verify the OTP with your backend
-    setIsVerifying(false)
-    alert("OTP verification successful!")
+      // Handle successful verification
+      alert("OTP verification successful!");
+      // Consider redirecting or updating state here instead of just alerting
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "An unexpected error occurred");
+    } finally {
+      setIsVerifying(false);
+    }
   }
 
   const handleOtpChange = (value: string) => {
@@ -60,6 +103,8 @@ export default function RegisterPageComponent() {
           <SignupForm
             onSubmit={handleSignup}
             onEmailChange={(e) => setEmail(e.target.value)}
+            onFullNameChange={(e) => setFullName(e.target.value)}
+            onPasswordChange={(e) => setPassword(e.target.value)}
             isLoading={isLoading}
           />
         </motion.div>
@@ -89,10 +134,14 @@ function SignupForm({
   className,
   onSubmit,
   onEmailChange,
+  onFullNameChange,
+  onPasswordChange,
   isLoading,
   ...props
 }: React.ComponentPropsWithoutRef<"form"> & {
-  onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onFullNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
   isLoading: boolean
 }) {
   return (
@@ -104,7 +153,7 @@ function SignupForm({
       <div className="grid gap-6">
         <div className="grid gap-2">
           <Label htmlFor="fullName">Full Name</Label>
-          <Input id="fullName" type="text" required />
+          <Input id="fullName" type="text" onChange={onFullNameChange} required />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
@@ -112,7 +161,7 @@ function SignupForm({
         </div>
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" required />
+          <Input id="password" type="password" onChange={onPasswordChange} required />
         </div>
         <Button type="submit" className="w-full" disabled={isLoading}>
           {isLoading ? (
@@ -132,17 +181,17 @@ function SignupForm({
         </Link>
       </div>
       <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-          <span className="relative z-10 bg-background px-2 text-muted-foreground">Or continue with</span>
-        </div>
-        <Button variant="outline" className="w-full">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path
-              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-              fill="currentColor"
-            />
-          </svg>
-          Login with GitHub
-        </Button>
+        <span className="relative z-10 bg-background px-2 text-muted-foreground">Or continue with</span>
+      </div>
+      <Button variant="outline" className="w-full">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+            fill="currentColor"
+          />
+        </svg>
+        Login with GitHub
+      </Button>
     </form>
   )
 }

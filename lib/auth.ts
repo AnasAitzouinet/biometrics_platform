@@ -5,6 +5,9 @@ import { organization } from "better-auth/plugins"
 import { customSession } from "better-auth/plugins";
 import { getUserById } from "@/utils/User/UserCrud";
 import { Roles } from "@/lib/generated/prisma";
+import { haveIBeenPwned } from "better-auth/plugins"
+import { emailOTP } from "better-auth/plugins"
+import { sendOtpMail } from "./mails/SendOtpMail";
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
@@ -32,6 +35,23 @@ export const auth = betterAuth({
                 }
             }
             return session;
+        }),
+        haveIBeenPwned(),
+        emailOTP({
+            async sendVerificationOTP({ email, otp, type }) {
+                // Implement the sendVerificationOTP method to send the OTP to the user's email address
+                console.log(`Sending ${type} OTP to ${email}: ${otp}`);
+                const mail = await sendOtpMail({
+                    email,
+                    otp,
+                });
+
+                if (!mail.success) {
+                    console.error("Failed to send OTP email:", mail.error);
+                    throw new Error("Failed to send OTP email");
+                }
+                return;
+            },
         }),
     ],
     emailAndPassword: {

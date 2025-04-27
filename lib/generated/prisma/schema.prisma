@@ -70,14 +70,16 @@ model Verification {
 }
 
 model Organization {
-  id          String       @id
-  name        String
-  slug        String?      @unique
-  logo        String?
-  createdAt   DateTime
-  metadata    String?
-  invitations Invitation[]
-  members     Member[]
+  id           String       @id
+  name         String
+  slug         String?      @unique
+  logo         String?
+  isConfigured Boolean      @default(false)
+  isVerified   Boolean      @default(false)
+  createdAt    DateTime
+  metadata     String?
+  invitations  Invitation[]
+  members      Member[]
 
   @@map("organization")
 }
@@ -91,6 +93,9 @@ model Member {
   id             String       @id
   organizationId String
   userId         String
+  isOwner        Boolean      @default(false)
+  isSetup        Boolean      @default(false)
+  isVerified     Boolean      @default(false)
   role           Roles
   createdAt      DateTime
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)

@@ -6004,6 +6004,8 @@ export namespace Prisma {
     name: string | null
     slug: string | null
     logo: string | null
+    isConfigured: boolean | null
+    isVerified: boolean | null
     createdAt: Date | null
     metadata: string | null
   }
@@ -6013,6 +6015,8 @@ export namespace Prisma {
     name: string | null
     slug: string | null
     logo: string | null
+    isConfigured: boolean | null
+    isVerified: boolean | null
     createdAt: Date | null
     metadata: string | null
   }
@@ -6022,6 +6026,8 @@ export namespace Prisma {
     name: number
     slug: number
     logo: number
+    isConfigured: number
+    isVerified: number
     createdAt: number
     metadata: number
     _all: number
@@ -6033,6 +6039,8 @@ export namespace Prisma {
     name?: true
     slug?: true
     logo?: true
+    isConfigured?: true
+    isVerified?: true
     createdAt?: true
     metadata?: true
   }
@@ -6042,6 +6050,8 @@ export namespace Prisma {
     name?: true
     slug?: true
     logo?: true
+    isConfigured?: true
+    isVerified?: true
     createdAt?: true
     metadata?: true
   }
@@ -6051,6 +6061,8 @@ export namespace Prisma {
     name?: true
     slug?: true
     logo?: true
+    isConfigured?: true
+    isVerified?: true
     createdAt?: true
     metadata?: true
     _all?: true
@@ -6133,6 +6145,8 @@ export namespace Prisma {
     name: string
     slug: string | null
     logo: string | null
+    isConfigured: boolean
+    isVerified: boolean
     createdAt: Date
     metadata: string | null
     _count: OrganizationCountAggregateOutputType | null
@@ -6159,6 +6173,8 @@ export namespace Prisma {
     name?: boolean
     slug?: boolean
     logo?: boolean
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt?: boolean
     metadata?: boolean
     invitations?: boolean | Organization$invitationsArgs<ExtArgs>
@@ -6171,6 +6187,8 @@ export namespace Prisma {
     name?: boolean
     slug?: boolean
     logo?: boolean
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt?: boolean
     metadata?: boolean
   }, ExtArgs["result"]["organization"]>
@@ -6180,6 +6198,8 @@ export namespace Prisma {
     name?: boolean
     slug?: boolean
     logo?: boolean
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt?: boolean
     metadata?: boolean
   }, ExtArgs["result"]["organization"]>
@@ -6189,11 +6209,13 @@ export namespace Prisma {
     name?: boolean
     slug?: boolean
     logo?: boolean
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt?: boolean
     metadata?: boolean
   }
 
-  export type OrganizationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "logo" | "createdAt" | "metadata", ExtArgs["result"]["organization"]>
+  export type OrganizationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "logo" | "isConfigured" | "isVerified" | "createdAt" | "metadata", ExtArgs["result"]["organization"]>
   export type OrganizationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     invitations?: boolean | Organization$invitationsArgs<ExtArgs>
     members?: boolean | Organization$membersArgs<ExtArgs>
@@ -6213,6 +6235,8 @@ export namespace Prisma {
       name: string
       slug: string | null
       logo: string | null
+      isConfigured: boolean
+      isVerified: boolean
       createdAt: Date
       metadata: string | null
     }, ExtArgs["result"]["organization"]>
@@ -6644,6 +6668,8 @@ export namespace Prisma {
     readonly name: FieldRef<"Organization", 'String'>
     readonly slug: FieldRef<"Organization", 'String'>
     readonly logo: FieldRef<"Organization", 'String'>
+    readonly isConfigured: FieldRef<"Organization", 'Boolean'>
+    readonly isVerified: FieldRef<"Organization", 'Boolean'>
     readonly createdAt: FieldRef<"Organization", 'DateTime'>
     readonly metadata: FieldRef<"Organization", 'String'>
   }
@@ -7114,6 +7140,9 @@ export namespace Prisma {
     id: string | null
     organizationId: string | null
     userId: string | null
+    isOwner: boolean | null
+    isSetup: boolean | null
+    isVerified: boolean | null
     role: $Enums.Roles | null
     createdAt: Date | null
   }
@@ -7122,6 +7151,9 @@ export namespace Prisma {
     id: string | null
     organizationId: string | null
     userId: string | null
+    isOwner: boolean | null
+    isSetup: boolean | null
+    isVerified: boolean | null
     role: $Enums.Roles | null
     createdAt: Date | null
   }
@@ -7130,6 +7162,9 @@ export namespace Prisma {
     id: number
     organizationId: number
     userId: number
+    isOwner: number
+    isSetup: number
+    isVerified: number
     role: number
     createdAt: number
     _all: number
@@ -7140,6 +7175,9 @@ export namespace Prisma {
     id?: true
     organizationId?: true
     userId?: true
+    isOwner?: true
+    isSetup?: true
+    isVerified?: true
     role?: true
     createdAt?: true
   }
@@ -7148,6 +7186,9 @@ export namespace Prisma {
     id?: true
     organizationId?: true
     userId?: true
+    isOwner?: true
+    isSetup?: true
+    isVerified?: true
     role?: true
     createdAt?: true
   }
@@ -7156,6 +7197,9 @@ export namespace Prisma {
     id?: true
     organizationId?: true
     userId?: true
+    isOwner?: true
+    isSetup?: true
+    isVerified?: true
     role?: true
     createdAt?: true
     _all?: true
@@ -7237,6 +7281,9 @@ export namespace Prisma {
     id: string
     organizationId: string
     userId: string
+    isOwner: boolean
+    isSetup: boolean
+    isVerified: boolean
     role: $Enums.Roles
     createdAt: Date
     _count: MemberCountAggregateOutputType | null
@@ -7262,6 +7309,9 @@ export namespace Prisma {
     id?: boolean
     organizationId?: boolean
     userId?: boolean
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role?: boolean
     createdAt?: boolean
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
@@ -7272,6 +7322,9 @@ export namespace Prisma {
     id?: boolean
     organizationId?: boolean
     userId?: boolean
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role?: boolean
     createdAt?: boolean
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
@@ -7282,6 +7335,9 @@ export namespace Prisma {
     id?: boolean
     organizationId?: boolean
     userId?: boolean
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role?: boolean
     createdAt?: boolean
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
@@ -7292,11 +7348,14 @@ export namespace Prisma {
     id?: boolean
     organizationId?: boolean
     userId?: boolean
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role?: boolean
     createdAt?: boolean
   }
 
-  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "organizationId" | "userId" | "role" | "createdAt", ExtArgs["result"]["member"]>
+  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "organizationId" | "userId" | "isOwner" | "isSetup" | "isVerified" | "role" | "createdAt", ExtArgs["result"]["member"]>
   export type MemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     organization?: boolean | OrganizationDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -7320,6 +7379,9 @@ export namespace Prisma {
       id: string
       organizationId: string
       userId: string
+      isOwner: boolean
+      isSetup: boolean
+      isVerified: boolean
       role: $Enums.Roles
       createdAt: Date
     }, ExtArgs["result"]["member"]>
@@ -7750,6 +7812,9 @@ export namespace Prisma {
     readonly id: FieldRef<"Member", 'String'>
     readonly organizationId: FieldRef<"Member", 'String'>
     readonly userId: FieldRef<"Member", 'String'>
+    readonly isOwner: FieldRef<"Member", 'Boolean'>
+    readonly isSetup: FieldRef<"Member", 'Boolean'>
+    readonly isVerified: FieldRef<"Member", 'Boolean'>
     readonly role: FieldRef<"Member", 'Roles'>
     readonly createdAt: FieldRef<"Member", 'DateTime'>
   }
@@ -9336,6 +9401,8 @@ export namespace Prisma {
     name: 'name',
     slug: 'slug',
     logo: 'logo',
+    isConfigured: 'isConfigured',
+    isVerified: 'isVerified',
     createdAt: 'createdAt',
     metadata: 'metadata'
   };
@@ -9347,6 +9414,9 @@ export namespace Prisma {
     id: 'id',
     organizationId: 'organizationId',
     userId: 'userId',
+    isOwner: 'isOwner',
+    isSetup: 'isSetup',
+    isVerified: 'isVerified',
     role: 'role',
     createdAt: 'createdAt'
   };
@@ -9771,6 +9841,8 @@ export namespace Prisma {
     name?: StringFilter<"Organization"> | string
     slug?: StringNullableFilter<"Organization"> | string | null
     logo?: StringNullableFilter<"Organization"> | string | null
+    isConfigured?: BoolFilter<"Organization"> | boolean
+    isVerified?: BoolFilter<"Organization"> | boolean
     createdAt?: DateTimeFilter<"Organization"> | Date | string
     metadata?: StringNullableFilter<"Organization"> | string | null
     invitations?: InvitationListRelationFilter
@@ -9782,6 +9854,8 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrderInput | SortOrder
     logo?: SortOrderInput | SortOrder
+    isConfigured?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     metadata?: SortOrderInput | SortOrder
     invitations?: InvitationOrderByRelationAggregateInput
@@ -9796,6 +9870,8 @@ export namespace Prisma {
     NOT?: OrganizationWhereInput | OrganizationWhereInput[]
     name?: StringFilter<"Organization"> | string
     logo?: StringNullableFilter<"Organization"> | string | null
+    isConfigured?: BoolFilter<"Organization"> | boolean
+    isVerified?: BoolFilter<"Organization"> | boolean
     createdAt?: DateTimeFilter<"Organization"> | Date | string
     metadata?: StringNullableFilter<"Organization"> | string | null
     invitations?: InvitationListRelationFilter
@@ -9807,6 +9883,8 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrderInput | SortOrder
     logo?: SortOrderInput | SortOrder
+    isConfigured?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     metadata?: SortOrderInput | SortOrder
     _count?: OrganizationCountOrderByAggregateInput
@@ -9822,6 +9900,8 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Organization"> | string
     slug?: StringNullableWithAggregatesFilter<"Organization"> | string | null
     logo?: StringNullableWithAggregatesFilter<"Organization"> | string | null
+    isConfigured?: BoolWithAggregatesFilter<"Organization"> | boolean
+    isVerified?: BoolWithAggregatesFilter<"Organization"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Organization"> | Date | string
     metadata?: StringNullableWithAggregatesFilter<"Organization"> | string | null
   }
@@ -9833,6 +9913,9 @@ export namespace Prisma {
     id?: StringFilter<"Member"> | string
     organizationId?: StringFilter<"Member"> | string
     userId?: StringFilter<"Member"> | string
+    isOwner?: BoolFilter<"Member"> | boolean
+    isSetup?: BoolFilter<"Member"> | boolean
+    isVerified?: BoolFilter<"Member"> | boolean
     role?: EnumRolesFilter<"Member"> | $Enums.Roles
     createdAt?: DateTimeFilter<"Member"> | Date | string
     organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
@@ -9843,6 +9926,9 @@ export namespace Prisma {
     id?: SortOrder
     organizationId?: SortOrder
     userId?: SortOrder
+    isOwner?: SortOrder
+    isSetup?: SortOrder
+    isVerified?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     organization?: OrganizationOrderByWithRelationInput
@@ -9856,6 +9942,9 @@ export namespace Prisma {
     NOT?: MemberWhereInput | MemberWhereInput[]
     organizationId?: StringFilter<"Member"> | string
     userId?: StringFilter<"Member"> | string
+    isOwner?: BoolFilter<"Member"> | boolean
+    isSetup?: BoolFilter<"Member"> | boolean
+    isVerified?: BoolFilter<"Member"> | boolean
     role?: EnumRolesFilter<"Member"> | $Enums.Roles
     createdAt?: DateTimeFilter<"Member"> | Date | string
     organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
@@ -9866,6 +9955,9 @@ export namespace Prisma {
     id?: SortOrder
     organizationId?: SortOrder
     userId?: SortOrder
+    isOwner?: SortOrder
+    isSetup?: SortOrder
+    isVerified?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     _count?: MemberCountOrderByAggregateInput
@@ -9880,6 +9972,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Member"> | string
     organizationId?: StringWithAggregatesFilter<"Member"> | string
     userId?: StringWithAggregatesFilter<"Member"> | string
+    isOwner?: BoolWithAggregatesFilter<"Member"> | boolean
+    isSetup?: BoolWithAggregatesFilter<"Member"> | boolean
+    isVerified?: BoolWithAggregatesFilter<"Member"> | boolean
     role?: EnumRolesWithAggregatesFilter<"Member"> | $Enums.Roles
     createdAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
   }
@@ -10300,6 +10395,8 @@ export namespace Prisma {
     name: string
     slug?: string | null
     logo?: string | null
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt: Date | string
     metadata?: string | null
     invitations?: InvitationCreateNestedManyWithoutOrganizationInput
@@ -10311,6 +10408,8 @@ export namespace Prisma {
     name: string
     slug?: string | null
     logo?: string | null
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt: Date | string
     metadata?: string | null
     invitations?: InvitationUncheckedCreateNestedManyWithoutOrganizationInput
@@ -10322,6 +10421,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    isConfigured?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
     invitations?: InvitationUpdateManyWithoutOrganizationNestedInput
@@ -10333,6 +10434,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    isConfigured?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
     invitations?: InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -10344,6 +10447,8 @@ export namespace Prisma {
     name: string
     slug?: string | null
     logo?: string | null
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt: Date | string
     metadata?: string | null
   }
@@ -10353,6 +10458,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    isConfigured?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -10362,12 +10469,17 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    isConfigured?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MemberCreateInput = {
     id: string
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role: $Enums.Roles
     createdAt: Date | string
     organization: OrganizationCreateNestedOneWithoutMembersInput
@@ -10378,12 +10490,18 @@ export namespace Prisma {
     id: string
     organizationId: string
     userId: string
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role: $Enums.Roles
     createdAt: Date | string
   }
 
   export type MemberUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organization?: OrganizationUpdateOneRequiredWithoutMembersNestedInput
@@ -10394,6 +10512,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10402,12 +10523,18 @@ export namespace Prisma {
     id: string
     organizationId: string
     userId: string
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role: $Enums.Roles
     createdAt: Date | string
   }
 
   export type MemberUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10416,6 +10543,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10813,6 +10943,8 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrder
     logo?: SortOrder
+    isConfigured?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     metadata?: SortOrder
   }
@@ -10822,6 +10954,8 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrder
     logo?: SortOrder
+    isConfigured?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     metadata?: SortOrder
   }
@@ -10831,6 +10965,8 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrder
     logo?: SortOrder
+    isConfigured?: SortOrder
+    isVerified?: SortOrder
     createdAt?: SortOrder
     metadata?: SortOrder
   }
@@ -10851,6 +10987,9 @@ export namespace Prisma {
     id?: SortOrder
     organizationId?: SortOrder
     userId?: SortOrder
+    isOwner?: SortOrder
+    isSetup?: SortOrder
+    isVerified?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
   }
@@ -10859,6 +10998,9 @@ export namespace Prisma {
     id?: SortOrder
     organizationId?: SortOrder
     userId?: SortOrder
+    isOwner?: SortOrder
+    isSetup?: SortOrder
+    isVerified?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
   }
@@ -10867,6 +11009,9 @@ export namespace Prisma {
     id?: SortOrder
     organizationId?: SortOrder
     userId?: SortOrder
+    isOwner?: SortOrder
+    isSetup?: SortOrder
+    isVerified?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
   }
@@ -11505,6 +11650,9 @@ export namespace Prisma {
 
   export type MemberCreateWithoutUserInput = {
     id: string
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role: $Enums.Roles
     createdAt: Date | string
     organization: OrganizationCreateNestedOneWithoutMembersInput
@@ -11513,6 +11661,9 @@ export namespace Prisma {
   export type MemberUncheckedCreateWithoutUserInput = {
     id: string
     organizationId: string
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role: $Enums.Roles
     createdAt: Date | string
   }
@@ -11646,6 +11797,9 @@ export namespace Prisma {
     id?: StringFilter<"Member"> | string
     organizationId?: StringFilter<"Member"> | string
     userId?: StringFilter<"Member"> | string
+    isOwner?: BoolFilter<"Member"> | boolean
+    isSetup?: BoolFilter<"Member"> | boolean
+    isVerified?: BoolFilter<"Member"> | boolean
     role?: EnumRolesFilter<"Member"> | $Enums.Roles
     createdAt?: DateTimeFilter<"Member"> | Date | string
   }
@@ -11847,6 +12001,9 @@ export namespace Prisma {
 
   export type MemberCreateWithoutOrganizationInput = {
     id: string
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role: $Enums.Roles
     createdAt: Date | string
     user: UserCreateNestedOneWithoutMembersInput
@@ -11855,6 +12012,9 @@ export namespace Prisma {
   export type MemberUncheckedCreateWithoutOrganizationInput = {
     id: string
     userId: string
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role: $Enums.Roles
     createdAt: Date | string
   }
@@ -11906,6 +12066,8 @@ export namespace Prisma {
     name: string
     slug?: string | null
     logo?: string | null
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt: Date | string
     metadata?: string | null
     invitations?: InvitationCreateNestedManyWithoutOrganizationInput
@@ -11916,6 +12078,8 @@ export namespace Prisma {
     name: string
     slug?: string | null
     logo?: string | null
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt: Date | string
     metadata?: string | null
     invitations?: InvitationUncheckedCreateNestedManyWithoutOrganizationInput
@@ -11973,6 +12137,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    isConfigured?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
     invitations?: InvitationUpdateManyWithoutOrganizationNestedInput
@@ -11983,6 +12149,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    isConfigured?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
     invitations?: InvitationUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -12061,6 +12229,8 @@ export namespace Prisma {
     name: string
     slug?: string | null
     logo?: string | null
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt: Date | string
     metadata?: string | null
     members?: MemberCreateNestedManyWithoutOrganizationInput
@@ -12071,6 +12241,8 @@ export namespace Prisma {
     name: string
     slug?: string | null
     logo?: string | null
+    isConfigured?: boolean
+    isVerified?: boolean
     createdAt: Date | string
     metadata?: string | null
     members?: MemberUncheckedCreateNestedManyWithoutOrganizationInput
@@ -12134,6 +12306,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    isConfigured?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
     members?: MemberUpdateManyWithoutOrganizationNestedInput
@@ -12144,6 +12318,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     logo?: NullableStringFieldUpdateOperationsInput | string | null
+    isConfigured?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: NullableStringFieldUpdateOperationsInput | string | null
     members?: MemberUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -12176,6 +12352,9 @@ export namespace Prisma {
   export type MemberCreateManyUserInput = {
     id: string
     organizationId: string
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role: $Enums.Roles
     createdAt: Date | string
   }
@@ -12265,6 +12444,9 @@ export namespace Prisma {
 
   export type MemberUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     organization?: OrganizationUpdateOneRequiredWithoutMembersNestedInput
@@ -12273,6 +12455,9 @@ export namespace Prisma {
   export type MemberUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12280,6 +12465,9 @@ export namespace Prisma {
   export type MemberUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     organizationId?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12329,6 +12517,9 @@ export namespace Prisma {
   export type MemberCreateManyOrganizationInput = {
     id: string
     userId: string
+    isOwner?: boolean
+    isSetup?: boolean
+    isVerified?: boolean
     role: $Enums.Roles
     createdAt: Date | string
   }
@@ -12362,6 +12553,9 @@ export namespace Prisma {
 
   export type MemberUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutMembersNestedInput
@@ -12370,6 +12564,9 @@ export namespace Prisma {
   export type MemberUncheckedUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12377,6 +12574,9 @@ export namespace Prisma {
   export type MemberUncheckedUpdateManyWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    isOwner?: BoolFieldUpdateOperationsInput | boolean
+    isSetup?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRolesFieldUpdateOperationsInput | $Enums.Roles
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
