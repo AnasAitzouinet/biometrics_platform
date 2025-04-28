@@ -8,6 +8,7 @@ import { Roles } from "@/lib/generated/prisma";
 import { haveIBeenPwned } from "better-auth/plugins"
 import { emailOTP } from "better-auth/plugins"
 import { sendOtpMail } from "./mails/SendOtpMail";
+import { sendVerifyMail } from "./mails/SendVerifyMail";
 
 export const auth = betterAuth({
     database: prismaAdapter(prisma, {
@@ -23,7 +24,7 @@ export const auth = betterAuth({
         }),
         customSession(async ({ user, session }) => {
             const userData = await getUserById(user.id)
-             if (userData && userData.members.length > 0) {
+            if (userData && userData.members.length > 0) {
                 const hasOrganization = userData.members.length > 0 && userData.members[0].organizationId !== null && userData.members[0].role === Roles.ADMIN
                 return {
                     ...session,
@@ -52,9 +53,20 @@ export const auth = betterAuth({
                 return;
             },
             sendVerificationOnSignUp: true,
+
         }),
     ],
     emailAndPassword: {
-        enabled: true
+        enabled: true,
+        requireEmailVerification: true,
+    },
+    emailVerification: {
+        sendVerificationEmail: async ({ user, url, token }, request) => {
+            await sendVerifyMail({
+                email: user.email,
+                url: `Click the link to verify your email: ${url}`,
+            });
+        },
+        sendVerificationOnSignUp: false,
     },
 });

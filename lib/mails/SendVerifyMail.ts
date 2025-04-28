@@ -5,18 +5,18 @@ if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY is not defined");
 
 const resend = new Resend(RESEND_API_KEY);
 
-interface SendOtpMailParams {
+interface SendVerifyMailParams {
     email: string;
-    otp: string;
+    url: string;
 }
 
-export const sendOtpMail = async ({ email, otp }: SendOtpMailParams) => {
+export const sendVerifyMail = async ({ email, url }: SendVerifyMailParams) => {
     try {
         const data = await resend.emails.send({
             from: 'verify@letheio.com',
             to: [email],
-            subject: 'Your One-Time Password',
-            html: `<p>Your OTP is: <strong>${otp}</strong></p>`,
+            subject: 'Your Email Verification Link',
+            html: `<p>Url is: <strong>${url}</strong></p>`,
         });
 
         return { success: true, data };

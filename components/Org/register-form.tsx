@@ -47,9 +47,13 @@ export default function RegisterPageComponent() {
   const onSubmit = async (values: z.infer<typeof EmployeeSignUpSchema>) => {
     try {
       const { fullName, email, password } = values
-      const response = await EmployeeSignUp({ fullName, email, password })
-      if (response.error) {
-        toast.error(response.message)
+      const { data, error } = await authClient.signUp.email({
+        name: fullName,
+        email,
+        password,
+      })
+      if (error) {
+        toast.error(error.message)
         return
       }
       toast.success("Sign up successful! Check your email for the OTP.")
