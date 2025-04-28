@@ -2,7 +2,6 @@
 import { EmployeeSignUpSchema } from './../schema/Employee';
 import * as z from "zod"
 import { auth } from "@/lib/auth"
-import prisma from "@/utils/prisma"
 import { EmployeeLoginSchema } from "@/schema/Employee"
 import { headers } from "next/headers"
 
@@ -18,12 +17,14 @@ export const EmployerLogin = async (data: z.infer<typeof EmployeeLoginSchema>) =
         const { email, password } = validatedData;
 
         const user = await auth.api.signInEmail({
+            headers: await headers(),
             body: {
                 email,
                 password,
-            }
+            },
+            asResponse: true,
         });
-
+        console.log("user", user)
         if (!user) {
             return {
                 error: "Invalid credentials",
@@ -34,7 +35,7 @@ export const EmployerLogin = async (data: z.infer<typeof EmployeeLoginSchema>) =
         return {
             success: true,
             message: "Login successful",
-            user,
+
         }
     } catch (error) {
         console.error("Error during login:", error);
@@ -72,16 +73,7 @@ export const EmployeeSignUp = async (data: z.infer<typeof EmployeeSignUpSchema>)
             }
         }
 
-        // Send OTP email
-        const otp = await auth.api.sendVerificationOTP({
-            body: {
-                email,
-                type: "email-verification",
-            }
-        });
 
-
-        console.log("OTP sent:", otp);
         return {
             success: true,
             message: "Login successful",
@@ -97,4 +89,3 @@ export const EmployeeSignUp = async (data: z.infer<typeof EmployeeSignUpSchema>)
     }
 }
 
-   

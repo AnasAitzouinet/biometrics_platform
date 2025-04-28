@@ -4,9 +4,6 @@ import React from 'react'
 
 export default async function OrgAuth() {
 
-    
-
-
     return (
         <LoginForm />
     )

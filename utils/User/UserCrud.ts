@@ -10,8 +10,7 @@ export async function createUser(data: any) {
     return user;
 }
 export async function getUserById(id: string) {
-    console.log("Fetching user with ID:", id);
-    try {
+     try {
         const user = await prisma.user.findUnique({
             where: {
                 id,

@@ -13,7 +13,7 @@ export default async function Layout({children}: Props) {
     const data = await auth.api.getSession({
         headers: await headers(),
     });
-    console.log(data);
+    console.log("data", data);
     if (data) {
         redirect('/dashboard');
     }

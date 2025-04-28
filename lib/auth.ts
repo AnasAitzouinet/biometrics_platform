@@ -23,8 +23,7 @@ export const auth = betterAuth({
         }),
         customSession(async ({ user, session }) => {
             const userData = await getUserById(user.id)
-            console.log(userData)
-            if (userData && userData.members) {
+             if (userData && userData.members.length > 0) {
                 const hasOrganization = userData.members.length > 0 && userData.members[0].organizationId !== null && userData.members[0].role === Roles.ADMIN
                 return {
                     ...session,
@@ -52,6 +51,7 @@ export const auth = betterAuth({
                 }
                 return;
             },
+            sendVerificationOnSignUp: true,
         }),
     ],
     emailAndPassword: {
